@@ -6,7 +6,7 @@
             <router-link class="header" :to="{name: 'Home'}">FireBlogs</router-link>
         </div>
         <div class="nav-links">
-            <ul>
+            <ul v-show="!mobile">
                 <router-link class="link" to="#">Home</router-link>
                 <router-link class="link" to="#">Blogs</router-link>
                 <router-link class="link" to="#">Create Post</router-link>
@@ -15,10 +15,10 @@
         </div>
     </nav>
 
-    <menuIcon class="menu-icon" />
+    <menuIcon @click="toggleMobileNav" class="menu-icon" v-show="mobile" />
 
     <transition name="mobile-nav">
-        <ul class="mobile-nav">
+        <ul class="mobile-nav" v-show="mobileNav">
             <router-link class="link" to="#">Home</router-link>
             <router-link class="link" to="#">Blogs</router-link>
             <router-link class="link" to="#">Create Post</router-link>
@@ -36,6 +36,37 @@ import menuIcon from '../assets/Icons/bars-regular.svg'
         name: 'navigation',
         components: {
             menuIcon
+        },
+
+        data(){
+            return{
+                mobile: null,
+                mobileNav: null,
+                windowWidth: null
+            }
+        },
+
+        created(){
+            window.addEventListener("resize", this.checkScreen)
+            this.checkScreen()
+        },
+
+        methods: {
+            // to check the width of the screen
+            checkScreen(){
+                this.windowWidth = window.innerWidth
+                if(this.windowWidth <= 750){
+                    this.mobile = true
+                    return
+                }
+                this.mobile = false
+                this.mobileNav = false
+                return
+            },
+
+            toggleMobileNav(){
+                this.mobileNav = !this.mobileNav
+            }
         }
         
     }
@@ -117,6 +148,30 @@ nav{
     background-color: #303030;
     top: 0;
     left: 0;
+}
+
+.mobile-nav .link{
+    padding: 15px 0;
+    color: #fff;
+}
+
+/* it will take 1 sec for the navigation bar to come and leave */
+.mobile-nav-enter-active, .mobile-nav-leave-active{
+    transition: all 1s ease;   
+}
+
+/* the nav bar will come smoothly */
+.mobile-nav-enter{
+    transform: translateX(-250px);
+}
+
+.mobile-nav-enter-to{
+    transform: translateX(0);
+}
+
+/* the nav bar will leave smoothly */
+.mobile-nav-leave-to{
+    transform: translateX(-250px);
 }
 
 </style>
