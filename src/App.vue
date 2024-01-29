@@ -107,4 +107,55 @@ export default {
   }
 }
 
+button, .router-button{
+  transition: .5s ease all;
+  cursor: pointer;
+  margin-top: 24px;
+  padding: 12px 24px;
+  background-color: #303030;
+  color: #fff;
+  border-radius: 20px;
+  border: none;
+  text-transform: uppercase;
+}
+
+button:hover, .router-button:hover{
+  background-color: rgba(48, 48, 48, 0.7);
+}
+
+button:focus, .router-button:focus{
+  outline: none;
+}
+
+.button-ghost{
+  color: #000;
+  padding: 0;
+  border-radius: 0;
+  margin-top: 50px;
+  font-weight: 500;
+  font-size: 15px;
+  background-color: transparent;
+}
+@media (min-width: 700px){
+  .button-ghost{
+    margin-top: 0;
+    margin-left: auto;
+  }
+  i{
+    margin-left: 8px;
+  }
+}
+
+.button-light{
+  background-color: transparent;
+  border: 2px solid #fff;
+  color: #fff;
+}
+
+.button-inactive{
+  pointer-events: none !important;
+  cursor: none !important;
+  background-color: rgba(128, 128, 128, 0.5) !important;
+}
+
 </style>
