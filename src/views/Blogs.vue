@@ -21,6 +21,21 @@ export default {
     computed:{
       sampleBlogCards(){
         return this.$store.state.sampleBlogCards
+      },
+
+      // when the toggleButton is clicked, it will change its value in form of true or false.
+      editPost: {
+        get(){
+          return this.$store.state.editPost
+        },
+        set(payload){
+          this.$store.commit("toggleEditPost", payload)
+        }
+      },
+
+      // when we leave the blogs section we will not see the edit and delete icon on blogs on home page.
+      beforeDestroy(){
+       return this.$store.commit("toggleEditPost", false)
       }
     }
 }
@@ -37,8 +52,7 @@ input[type="checkbox"]{
     width: 80px;
     height: 30px;
     border-radius: 20px;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0,1)
-                0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0,1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
 input[type="checkbox"]:before{
@@ -52,8 +66,7 @@ input[type="checkbox"]:before{
     background: #303030;
     transform: scale(1.1);
     transition: .7s ease all;
-     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0,1)
-                0 2px 4px -1px rgba(0, 0, 0, 0.06);
+     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0,1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
     }
 
 input:checked[type="checkbox"]:before{
@@ -69,7 +82,7 @@ input:checked[type="checkbox"]:before{
     display: flex;
     align-items: center;
     position: absolute;
-    top: -70px;
+    top: 40px;
     right: 0;
 }
 
