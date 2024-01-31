@@ -1,7 +1,8 @@
 <template>
 
 <div class="reset-password">
-    <Modal v-if="modalActive" :close-modal="closeModal" />
+    <Modal v-if="modalActive" @close-modal="closeModal" />
+    <!-- <Loading /> -->
     <div class="form-wrap">
         <form class="reset">
             <h2>Reset Password</h2>
@@ -23,18 +24,20 @@
 
 <script>
 import Modal from "../components/Modal.vue"
+// import Loading from "../components/Loading.vue"
 import email from "../assets/Icons/envelope-regular.svg"
 
     export default {
         name: 'ForgotPassword',
         components: {
             email,
-            Modal
+            Modal,
+            // Loading
         },
         data(){
             return{
                 email: null,
-                modalActive: true,
+                modalActive: false,
                 modalMessage: ""
             }
         },
