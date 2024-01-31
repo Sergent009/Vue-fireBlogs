@@ -28,9 +28,11 @@
                     <input type="text" placeholder="Password" v-model="password">
                     <password class="icon" />
                 </div>
-            </div>
 
-            <button>Sign Up</button>
+                <div v-show="error" class="error">{{errorMsg}}</div>
+
+            </div>
+            <button @click.prevent="register()">Sign Up</button>
             <div class="angle"></div>
         </form>
 
@@ -43,6 +45,12 @@
 import email from "../assets/Icons/envelope-regular.svg"
 import password from "../assets/Icons/lock-alt-solid.svg"
 import user from "../assets/Icons/user-alt-light.svg"
+
+// firebase packages
+import firebase from "firebase/app"
+import "firebase/auth"
+import db from "../firebase/firebaseInit"
+
     export default {
         name: "Register",
            components: {
@@ -52,11 +60,52 @@ import user from "../assets/Icons/user-alt-light.svg"
         },
         data(){
             return{
-                firstName: null,
-                lastName: null,
-                username: null,
-                email: null,
-                password: null
+                firstName: "",
+                lastName: "",
+                username: "",
+                email: "",
+                password: "",
+                error: null,
+                errorMsg: ""
+            }
+        },
+        methods: {
+            async register(){
+                // checking that any input field should not be empty / adding a validation.
+                if(
+                    this.email !== "" &&
+                    this.password !== "" &&
+                    this.firstName !== "" &&
+                    this.lastName !== "" &&
+                    this.username !== ""
+                ){
+                    // No validation error, proceed with user registration
+
+                // Firebase authentication
+                const firebaseAuth = await firebase.auth()
+
+                // Creating a new user with email and password
+                const createUser = await firebaseAuth.createUserWithEmailAndPassword(this.email, this.password)
+
+                // Obtaining user information from the registration result
+                const result = await createUser
+
+                // Accessing Firestore to store additional user information
+                const database = db.collection("users").doc(result.user.uid)
+
+                // Storing user data in Firestore
+                await database.set({
+                    firstName: this.firstName,
+                    lastName: this.lastName,
+                    username: this.username,
+                    email: this.email
+                })
+                    this.$router.push({name: "Home" })
+                    return
+                }
+                this.error = true
+                this.errorMsg = "Please fill all the fields!"
+                return
             }
         }
     }

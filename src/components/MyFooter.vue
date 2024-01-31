@@ -23,8 +23,8 @@
                 <ul>
                     <router-link class="link" :to="{name: 'home'}">Home</router-link>
                     <router-link class="link" :to="{name: 'blogs'}">Blogs</router-link>
-                    <router-link class="link" :to="{name: 'newpost'}">Create Post</router-link>
-                    <router-link class="link" :to="{name: 'login'}">LogIn/Register</router-link>
+                    <router-link class="link" to="#">Create Post</router-link>
+                    <router-link class="link" :to="{name: 'Login'}">LogIn/Register</router-link>
                 </ul>
             </div>
         </div>
@@ -86,7 +86,7 @@ div{
         flex-direction: row;
         align-items: initial;
         gap: 0px;
-    }
+    } 
 }
 
 .header{

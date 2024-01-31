@@ -176,4 +176,10 @@ button:focus, .router-button:focus{
   background-color: rgba(128, 128, 128, 0.5) !important;
 }
 
+.error{
+  text-align: center;
+  font-size: 12px;
+  color: red;
+}
+
 </style>
