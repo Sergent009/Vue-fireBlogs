@@ -1,9 +1,9 @@
 <template>
   <div class="app-wrapper">
     <div class="app">
-      <navigation />
+      <navigation v-if="!navigation" />
       <router-view />
-      <Footer />
+      <Footer v-if="!navigation" />
     </div>
   </div>
 </template>
@@ -19,13 +19,31 @@ export default {
     Footer
     },
   data() {
-    return {};
+    return {
+      navigation: null
+    };
   },
-  created() {},
+  created() {
+    this.checkRoute()
+  },
   mounted() {},
-  methods: {},
-  watch: {},
-};
+  // the navigation and footer will be hidden on login or register or forgotPassword Page.
+  methods: {
+    checkRoute(){
+      if(this.$route.name === "Login" || this.$route.name === "Register" || this.$route.name === "ForgotPassword"){
+        this.navigation = true
+        return
+      }{
+      this.navigation = false
+    }
+  },
+  watch: {
+    $route(){
+      this.checkRoute();
+    }
+  }
+}
+}
 </script>
 
 
