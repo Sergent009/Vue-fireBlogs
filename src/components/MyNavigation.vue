@@ -9,7 +9,7 @@
             <ul v-show="!mobile">
                 <router-link class="link" :to="{name: 'Home'}">Home</router-link>
                 <router-link class="link" :to="{name: 'Blogs'}">Blogs</router-link>
-                <router-link class="link" to="#">Create Post</router-link>
+                <router-link class="link" :to="{name: 'CreatePost'}">Create Post</router-link>
                 <router-link v-show="!user" class="link" :to="{name: 'Login'}">Login/Register</router-link>
             </ul>
 
@@ -53,7 +53,7 @@
         <ul class="mobile-nav" v-show="mobileNav">
             <router-link class="link" :to="{name: 'Home'}">Home</router-link>
             <router-link class="link" :to="{name: 'Blogs'}">Blogs</router-link>
-            <router-link class="link" to="#">Create Post</router-link>
+            <router-link class="link" :to="{name: 'CreatePost'}">Create Post</router-link>
             <router-link v-show="!user" class="link" :to="{name: 'Login'}">Login/Register</router-link>
         </ul>
     </transition>
@@ -125,6 +125,7 @@ import "firebase/auth"
             }
         },
 
+        // To return the current user.
         computed: {
             user(){
                 return this.$store.state.user

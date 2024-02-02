@@ -15,6 +15,12 @@ export default new Vuex.Store({
       {blogTitle: "Blog Card # 3", blogCoverPhoto: "stock-3", blogDate: "May 1, 2021"},
       {blogTitle: "Blog Card # 4", blogCoverPhoto: "stock-4", blogDate: "May 1, 2021"},
     ],
+    blogHTML: "Write your blog title here...",
+    blogTitle: "",
+    blogPhotoName: "",
+    blogPhotoFileURL: null,
+    blogPhotoPreview: null,
+
     editPost: null,
 
     user: null,
@@ -48,14 +54,17 @@ export default new Vuex.Store({
         state.profileLastName.match(/(\b\w)?/g || []).join("")
     },
 
+    // To update first Name of the user in account settings
     changedFirstName(state, payload){
       state.profileFirstName = payload
     },
 
+    // To update last Name of the user in account settings
     changedLastName(state, payload){
       state.profileLastName = payload
     },
 
+    // To update username of the user in account settings
     changedUsername(state, payload){
       state.profileUsername = payload
     },
