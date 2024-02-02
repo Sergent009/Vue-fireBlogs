@@ -44,8 +44,8 @@ export default new Vuex.Store({
 
     setProfileInitials(state){
       state.profileInitials = 
-        state.profileFirstName.match(/(\b\5)?/g).join("")
-        state.profileLastName.match(/(\b\5)?/g).join("")
+        state.profileFirstName.match(/(\b\w)?/g || []).join("") +
+        state.profileLastName.match(/(\b\w)?/g || []).join("")
     }
   },
   actions: {
@@ -54,7 +54,6 @@ export default new Vuex.Store({
       const dbResults = await dataBase.get()
       commit("setProfileInfo", dbResults)
       commit("setProfileInitials")
-      console.log(dbResults)
     }
   },
   modules: {
