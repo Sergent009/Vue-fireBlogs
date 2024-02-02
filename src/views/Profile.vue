@@ -9,6 +9,7 @@
             <div class="admin-badge">
                 <adminIcon class="icon" />
                 <span>admin</span>
+                 </div>
                 <div>
                     <div class="input">
                         <label for="firstName">First Name:</label>
@@ -24,13 +25,12 @@
                     </div>
                     <div class="input">
                         <label for="email">Email:</label>
-                        <input type="text" id="email" v-model="email">
+                        <input disabled type="text" id="email" v-model="email">
                     </div>
-                    <button>Save Changes</button>
+                    <button @click="updateProfile">Save Changes</button>
                 </div>
             </div>
         </div>
-    </div>
 </div>
 
 </template>
@@ -52,6 +52,50 @@ import adminIcon from "../assets/Icons/user-crown-light.svg"
             return{
                 modalMessage: "Changes were saved!",
                 modalActive: null
+            }
+        },
+
+        methods: {
+            closeModal(){
+                this.modalActive = !this.modalActive
+            },
+
+            updateProfile(){
+                this.$store.dispatch("updateUserSettings")
+                this.modalActive = !this.modalActive
+            }
+        },
+
+        computed: { 
+            // to get the first Name of the loggedIn user in the profile.
+            firstName: {
+                get(){
+                    return this.$store.state.profileFirstName
+                },
+                set(payload){
+                    this.$store.commit("changedFirstName", payload)
+                }
+            },
+            lastName: {
+                get(){
+                    return this.$store.state.profileLastName
+                },
+                set(payload){
+                    this.$store.commit("changedLastName", payload)
+                }
+            },
+            username: {
+                get(){
+                    return this.$store.state.profileUsername
+                },
+                set(payload){
+                    this.$store.commit("changedUsername", payload)
+                }
+            },
+            email: {
+                get(){
+                    return this.$store.state.profileEmail
+                }
             }
         }
     }
@@ -114,6 +158,7 @@ h2{
     width: 14px;
     height: auto;
     margin-right: 8px;
+    
 }
 
 .input{
