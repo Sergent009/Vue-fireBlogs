@@ -10,7 +10,7 @@
         </div>
         <img :src="post.blogCoverPhoto" alt="">
         <div class="info">
-            <h4>{{post.blogTitle}}</h4>
+            <h4>{{updateBlogTitle}}</h4>
             <h6>Posted on: {{new Date(post.blogDate).toLocaleString('en-us', {dateStyle: "long"})}}</h6>
             <router-link class="link" to="#">
                 View the Post <Arrow class="arrow" />
@@ -35,12 +35,16 @@ import Delete from "../assets/Icons/trash-regular.svg"
         computed: {
             editPost(){
                 return this.$store.state.editPost
-            }
+            },
         }
     }
 </script>
 
 <style scoped>
+
+h4{
+    color: #000;
+}
 
 .blog-card{
     position: relative;
