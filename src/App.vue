@@ -35,7 +35,9 @@ export default {
       }
     })
     this.checkRoute()
+    this.$store.dispatch("getPost")
   },
+  
   mounted() {},
   // the navigation and footer will be hidden on login or register or forgotPassword Page.
   methods: {

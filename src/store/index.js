@@ -15,6 +15,9 @@ export default new Vuex.Store({
       {blogTitle: "Blog Card # 3", blogCoverPhoto: "stock-3", blogDate: "May 1, 2021"},
       {blogTitle: "Blog Card # 4", blogCoverPhoto: "stock-4", blogDate: "May 1, 2021"},
     ],
+    blogPosts: [],    // to store all our blogs
+    postLoaded: null,
+
     blogHTML: "Write your blog title here...",
     blogTitle: "",
     blogPhotoName: "",
@@ -31,6 +34,17 @@ export default new Vuex.Store({
     profileId: null,
     profileInitials: null
   },
+
+  getters: {
+    blogPostsFeed(state){
+      return state.blogPosts.slice(0, 2)
+    },
+
+    blogPostsCards(state){
+      return state.blogPosts.slice(2, 6)
+    }
+  },
+
   mutations: {
     newBlogPost(state, payload){
       state.blogHTML = payload
@@ -105,7 +119,31 @@ export default new Vuex.Store({
         username: state.profileUsername
       })
       commit("setProfileInitials")
-    }
+    },
+
+    async getPost({state}){
+      // reference to our database
+      const dataBase = await db.collection('blogPosts').orderBy('date', 'desc')
+      const dbResults = await dataBase.get()
+      dbResults.forEach((doc) => {
+        if(!state.blogPosts.some(post => post.blogID === doc.id)){
+          // getting data from firestore collection
+          const data = {
+            blogID: doc.data().blogID,
+            blogHTML: doc.data().blogHTMl,
+            blogCoverPhoto: doc.data().blogCoverPhoto,
+            blogTitle: doc.data().blogtitle,
+            blogDate: doc.data().date
+          }
+
+          // pushing data into the blogPosts Array
+          state.blogPosts.push(data)
+        }
+      })
+
+      state.postLoaded = true
+      console.log(state.blogPosts)
+    },
   },
   modules: {
   }
