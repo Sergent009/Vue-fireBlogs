@@ -11,7 +11,7 @@
         <img :src="post.blogCoverPhoto" alt="">
         <div class="info">
             <h4>{{post.blogTitle}}</h4>
-            <h6>Posted on: {{new Date(post.blogDate).toLocalString('en-us', {dataStyle: "long"})}}</h6>
+            <h6>Posted on: {{new Date(post.blogDate).toLocaleString('en-us', {dateStyle: "long"})}}</h6>
             <router-link class="link" to="#">
                 View the Post <Arrow class="arrow" />
             </router-link>
@@ -61,9 +61,9 @@ import Delete from "../assets/Icons/trash-regular.svg"
 
 .icons{
     display: flex;
-    position: absolute;
+    /* position: absolute;
     top: 10px;
-    right: 10px;
+    right: 45px; */
     z-index: 99;
 }
 
@@ -76,19 +76,29 @@ import Delete from "../assets/Icons/trash-regular.svg"
     border-radius: 50%;
     background-color: #fff;
     transition: 0.5s ease all;
+    margin-top: 10px;
+    margin-left: 240px;
 }
 
 .icon:hover{
     background-color: #303030;
 }
 
+
 .edit{
     width: 20px;
     width: 20px;
+    /* position: absolute;
+    top: 20px;
+    left: 200px; */
+
 }
 .delete{
     width: 15px;
     width: 15px;
+     /* position: absolute;
+    top: 20px;
+    left: 250px; */
 }
 
 img{
