@@ -1,7 +1,7 @@
 <template>
 
 <div class="create-post">
-    <blogCoverPreview v-show="$store.state.blogCoverPreview"  />
+    <blogCoverPreview v-show="$store.state.blogPhotoPreview"  />
     <div class="container">
         <div :class="{invisible: !error}" class="err-message">
             <p><span>Error:</span>{{errorMsg}}</p>

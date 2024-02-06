@@ -64,9 +64,12 @@ import close from "../assets/Icons/times-circle-light.svg"
     cursor: pointer;
     font-size: 24px;
     position: absolute;
-    top: 15px;
-    right: 15px;
+    top: 20px;
+    left: 550px;
     color: #303030;
+}
+.icon:hover{
+    color: #666464;
 }
 
 img{
