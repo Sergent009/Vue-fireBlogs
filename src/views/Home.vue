@@ -14,7 +14,7 @@
     <div v-if="!user" class="updates">
       <div class="container">
         <h2>never miss a post. Register for your free account today</h2>
-        <router-link class="router-button" to="#">
+        <router-link class="router-button" :to="{name: 'Register'}">
           Register for fireBlogs <Arrow class="arrow arrow-light" />
         </router-link>
       </div>
@@ -68,10 +68,19 @@ export default {
 
 <style scoped>
 
+.blog-cards{
+  position: relative;
+  min-width: 1100px;
+  right: 70px;
+}
+
 h3{
   font-weight: 300;
   font-size: 28px;
   margin-bottom: 32px;
+  position: absolute;
+  top: 0px;
+  left: 40%;
 }
 
 .container{

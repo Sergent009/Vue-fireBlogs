@@ -1,9 +1,9 @@
 <template>
     <div class="blog-card">
         <div v-show="editPost" class="icons">
-            <!-- <div class="icon">
+            <div class="editicon">
                 <Edit class="edit" />
-            </div> -->
+            </div>
             <div @click="deletePost" class="icon">
                 <Delete class="delete" />
             </div>
@@ -21,7 +21,7 @@
 
 <script>
 import Arrow from "../assets/Icons/arrow-right-light.svg"
-// import Edit from "../assets/Icons/edit-regular.svg"
+import Edit from "../assets/Icons/edit-regular.svg"
 import Delete from "../assets/Icons/trash-regular.svg"
 
 
@@ -30,7 +30,7 @@ import Delete from "../assets/Icons/trash-regular.svg"
         props: ["post"],
         components: {
             Arrow,
-            // Edit,
+            Edit,
             Delete
         },
         computed: {
@@ -72,9 +72,6 @@ h4{
 
 .icons{
     display: flex;
-    /* position: absolute;
-    top: 10px;
-    right: 45px; */
     z-index: 99;
 }
 
@@ -91,26 +88,38 @@ h4{
     margin-left: 240px;
 }
 
+.editicon{
+    position: absolute;
+    top: 10px;
+    right: 60px;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background-color: #fff;
+    transition: 0.5s ease all;
+    margin-left: 240px;
+    transition: 0.5s ease all;
+}
+
 .icon:hover{
     background-color: #303030;
 }
-
+.editicon:hover{
+    background-color: #303030;
+}
 
 .edit{
     width: 20px;
     width: 20px;
-    /* position: absolute;
-    top: 20px;
-    left: 200px; */
-
+    position: absolute;
+    top: 8px;
+    left: 10px;
 }
 .delete{
     width: 15px;
     width: 15px;
-     /* position: absolute;
-    top: 20px;
-    left: 250px; */
 }
+
 
 img{
     display: block;
@@ -126,7 +135,7 @@ img{
     flex-direction: column;
     height: 100%;
     z-index: 3;
-    padding: 32px 16px;
+    padding: 0px 16px;
     color: #000;
 }
 
