@@ -1,7 +1,7 @@
 <template>
     <div class="blog-card">
         <div v-show="editPost" class="icons">
-            <div class="editicon">
+            <div @click="editBlog" class="editicon">
                 <Edit class="edit" />
             </div>
             <div @click="deletePost" class="icon">
@@ -42,6 +42,10 @@ import Delete from "../assets/Icons/trash-regular.svg"
         methods: {
             deletePost(){
                 this.$store.dispatch("deletePost", this.post.blogID)
+            },
+
+            editBlog(){
+                this.$router.push({name: 'EditBlog', params: {blogid: this.post.blogID}})
             }
         }
     }
