@@ -1,11 +1,11 @@
 <template>
 
-<div class="post-view">
+<div class="post-view" v-if="currentBlog">
     <div class="container quillWrapper">
-        <h2>{{this.currentBlog[0].blogTitle}}</h2>
-        <h4>Posted on : {{new Date(this.currentBlog[0].blogDate).toLocaleString("en-us", {dateStyle: "long"})}}</h4>
-        <img :src="this.currentBlog[0].blogCoverPhoto" alt="">
-        <div class="post-content ql-editor" v-html="this.currentBlog[0].blogHTML"></div>
+        <h2>{{currentBlog[0].blogTitle}}</h2>
+        <h4>Posted on : {{new Date(currentBlog[0].blogDate).toLocaleString("en-us", {dateStyle: "long"})}}</h4>
+        <img :src="currentBlog[0].blogCoverPhoto" alt="">
+        <div class="post-content ql-editor" v-html="currentBlog[0].blogHTML"></div>
     </div>
 </div>
 
@@ -26,15 +26,9 @@ export default {
             // that will return us the given blog
             return post.blogID === this.$route.params.blogid
         })
+            console.log(this.currentBlog)
     },
-
-    computed: {
-        updateBlogTitle(){
-            return this.$store.state.blogTitle
-        }
     }
-        
-}
 </script>
 
 <style>

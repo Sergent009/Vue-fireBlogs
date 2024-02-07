@@ -82,6 +82,12 @@ export default new Vuex.Store({
         state.profileLastName.match(/(\b\w)?/g || []).join("")
     },
 
+    filterBlogPost(state, payload){
+      state.blogPosts = state.blogPosts.filter((post) => {
+        post.blogID !== payload
+      })
+    },
+
     // To update first Name of the user in account settings
     changedFirstName(state, payload){
       state.profileFirstName = payload
@@ -105,6 +111,14 @@ export default new Vuex.Store({
       commit("setProfileInitials")
     },
 
+    async deletePost({commit}, payload){
+      // reference to the post that we want to delete
+      const getPost = await db.collection("blogPosts").doc(payload)
+      await getPost.delete()
+
+      commit('filterBlogPost', payload)
+    },
+
     async updateUserSettings({commit, state}){
       const dataBase = await db.collection('users').doc(state.profileId)
       await dataBase.update({
@@ -124,9 +138,9 @@ export default new Vuex.Store({
           // getting data from firestore collection
           const data = {
             blogID: doc.data().blogID,
-            blogHTML: doc.data().blogHTMl,
+            blogHTML: doc.data().blogHTML,
             blogCoverPhoto: doc.data().blogCoverPhoto,
-            blogTitle: doc.data().blogtitle,
+            blogTitle: doc.data().blogTitle,
             blogDate: doc.data().date
           }
 

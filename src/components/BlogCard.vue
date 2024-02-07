@@ -1,16 +1,16 @@
 <template>
     <div class="blog-card">
         <div v-show="editPost" class="icons">
-            <div class="icon">
+            <!-- <div class="icon">
                 <Edit class="edit" />
-            </div>
-            <div class="icon">
+            </div> -->
+            <div @click="deletePost" class="icon">
                 <Delete class="delete" />
             </div>
         </div>
         <img :src="post.blogCoverPhoto" alt="">
         <div class="info">
-            <h4>{{updateBlogTitle}}</h4>
+            <h4>{{post.blogTitle}}</h4>
             <h6>Posted on: {{new Date(post.blogDate).toLocaleString('en-us', {dateStyle: "long"})}}</h6>
             <router-link class="link" :to="{name: 'ViewBlog', params: {blogid: this.post.blogID}}">
                 View the Post <Arrow class="arrow" />
@@ -21,7 +21,7 @@
 
 <script>
 import Arrow from "../assets/Icons/arrow-right-light.svg"
-import Edit from "../assets/Icons/edit-regular.svg"
+// import Edit from "../assets/Icons/edit-regular.svg"
 import Delete from "../assets/Icons/trash-regular.svg"
 
 
@@ -30,13 +30,19 @@ import Delete from "../assets/Icons/trash-regular.svg"
         props: ["post"],
         components: {
             Arrow,
-            Edit,
+            // Edit,
             Delete
         },
         computed: {
             editPost(){
                 return this.$store.state.editPost
             },
+        },
+
+        methods: {
+            deletePost(){
+                this.$store.dispatch("deletePost", this.post.blogID)
+            }
         }
     }
 </script>
@@ -125,7 +131,7 @@ img{
 }
 
 h4{
-    padding-bottom: 8px;
+    padding-bottom: 0px;
     font-size: 20px;
     font-weight: 300;
 }
@@ -133,7 +139,7 @@ h4{
 h6{
     font-weight: 400;
     font-size: 12px;
-    padding-bottom: 16px;
+    padding-bottom: 0px;
 }
 
 .link{
@@ -141,7 +147,7 @@ h6{
     align-items: center;
     margin-top: auto;
     font-weight: 500;
-    padding-top: 28px;
+    padding-top: 0px;
     font-size: 12px;
     padding-bottom: 4px;
     transition: 0.5s ease-in all;
