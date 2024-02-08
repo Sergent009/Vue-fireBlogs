@@ -179,9 +179,9 @@ Quill.register("modules/imageResize", ImageResize)
         }, 5000)
         return
     }
-}
+},
 
-        }
+    }
 
     
 </script>

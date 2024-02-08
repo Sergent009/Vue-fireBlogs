@@ -126,6 +126,11 @@ export default new Vuex.Store({
       commit('filterBlogPost', payload)
     },
 
+    async updatePost({commit, dispatch}, payload){
+      commit("filterBlogPost", payload)
+      await dispatch("getPost")
+    },
+
     async updateUserSettings({commit, state}){
       const dataBase = await db.collection('users').doc(state.profileId)
       await dataBase.update({
@@ -148,7 +153,8 @@ export default new Vuex.Store({
             blogHTML: doc.data().blogHTML,
             blogCoverPhoto: doc.data().blogCoverPhoto,
             blogTitle: doc.data().blogTitle,
-            blogDate: doc.data().date
+            blogDate: doc.data().date,
+            blogCoverPhotoName: doc.data().blogCoverPhotoName
           }
 
           // pushing data into the blogPosts Array
